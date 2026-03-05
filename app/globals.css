@@ -13,8 +13,8 @@ body {
   display: flex;
   justify-content: center;
   padding: 16px;
-  background-color: #F5E9DD; /* soft tan page background */
-  color: #927C66;            /* taupe text */
+  background-color: #050716;  /* deep navy like logo background */
+  color: #D4AF37;             /* gold */
 }
 
 /* Main chat container width */
@@ -27,20 +27,22 @@ body {
 .chat-title {
   font-size: 24px;
   margin-bottom: 8px;
-  color: #9B7583; /* soft mauve */
+  color: #D4AF37;             /* main gold */
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .chat-subtitle {
   margin-bottom: 16px;
-  color: #9B7583;
+  color: #C3B58A;             /* softer gold for body text */
 }
 
 /* Scrollable message area */
 .chat-messages {
-  border: 1px solid #DCD8CE;
-  border-radius: 8px;
+  border: 1px solid #262840;
+  border-radius: 12px;
   padding: 12px;
-  background-color: #F5E9DD; /* or #DCD8CE if you want slightly darker */
+  background-color: #050716;  /* keep same dark background */
   max-height: 60vh;
   overflow-y: auto;
   margin-bottom: 12px;
@@ -49,7 +51,7 @@ body {
 /* Empty state / loading text */
 .chat-empty,
 .chat-loading {
-  color: #9B7583;
+  color: #C3B58A;
 }
 
 /* Rows and bubbles */
@@ -64,23 +66,24 @@ body {
 
 .message-bubble {
   display: inline-block;
-  padding: 6px 10px;
-  border-radius: 12px;
+  padding: 8px 12px;
+  border-radius: 16px;
   max-width: 80%;
   white-space: pre-wrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
-/* User message bubble */
+/* User message bubble – outlined gold */
 .message-user {
-  background-color: #F5E9DD;
-  color: #927C66;
-  border: 1px solid #DCD8CE;
+  background-color: transparent;
+  color: #F4D88A;
+  border: 1px solid #D4AF37;
 }
 
-/* Bot message bubble */
+/* Bot message bubble – filled soft navy with gold text */
 .message-bot {
-  background-color: #E6E6F2;
-  color: #9B7583;
+  background-color: #111325;
+  color: #F4D88A;
 }
 
 /* Input row */
@@ -94,13 +97,13 @@ body {
   flex: 1;
   padding: 8px 10px;
   border-radius: 999px;
-  border: 1px solid #DCD8CE;
-  background-color: #F5E9DD;
-  color: #927C66;
+  border: 1px solid #262840;
+  background-color: #050716;
+  color: #F4D88A;
 }
 
 .chat-input-field::placeholder {
-  color: #B9A4BD; /* dusty lavender placeholder */
+  color: #52556F;
 }
 
 /* Send button */
@@ -108,13 +111,14 @@ body {
   padding: 8px 16px;
   border-radius: 999px;
   border: none;
-  background-color: #C8A2C8; /* lilac button */
-  color: #F5E9DD;
+  background: linear-gradient(135deg, #F4D88A, #D4AF37);
+  color: #050716;
   font-weight: 600;
   cursor: pointer;
 }
 
 .chat-send-button:disabled {
-  background-color: #DCD8CE;
+  background: #4b4f6a;
+  color: #C3B58A;
   cursor: default;
 }
