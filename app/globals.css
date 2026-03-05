@@ -8,3 +8,28 @@ body {
   background-color: #020617;
   color: white;
 }
+
+/* Chat container */
+.chat-container {
+  background-color: #F5E9DD;          /* or #DCD8CE */
+  color: #927C66;
+}
+
+/* Bot messages */
+.message-bot {
+  background-color: #E6E6F2;
+  color: #9B7583;
+  border-radius: 16px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+}
+
+/* User messages */
+.message-user {
+  background-color: #F5E9DD;
+  color: #927C66;
+  border-radius: 16px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  text-align: right;                  /* optional, to align user text */
+}
