@@ -62,9 +62,9 @@ export default function HomePage() {
       }}
     >
       <div style={{ width: "100%", maxWidth: 640 }}>
-        <h1 style={{ fontSize: 24, marginBottom: 8 }}>Wix AI Chatbot</h1>
+        <h1 style={{ fontSize: 24, marginBottom: 8 }}>Aesthetic Services Assistant</h1>
         <p style={{ marginBottom: 16, color: "#cbd5f5" }}>
-          Type a question below. This is a minimal chatbot app.
+          Type a question below. 
         </p>
 
         <div
@@ -80,7 +80,7 @@ export default function HomePage() {
         >
           {messages.length === 0 && (
             <div style={{ color: "#64748b" }}>
-              No messages yet. Start the conversation.
+              Start your personalized journey here.
             </div>
           )}
           {messages.map((m, idx) => (
