@@ -26,7 +26,7 @@ export default function HomePage() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: history })
+        body: JSON.stringify({ messages: history }),
       });
 
       const data = await res.json();
@@ -42,8 +42,8 @@ export default function HomePage() {
         {
           role: "assistant",
           content:
-            "Error contacting AI service: " + (err?.message ?? "Unknown error")
-        }
+            "Error contacting AI service: " + (err?.message ?? "Unknown error"),
+        },
       ]);
     } finally {
       setLoading(false);
@@ -51,94 +51,54 @@ export default function HomePage() {
   }
 
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        padding: "16px",
-        backgroundColor: "#020617",
-        color: "white"
-      }}
-    >
-      <div style={{ width: "100%", maxWidth: 640 }}>
-        <h1 style={{ fontSize: 24, marginBottom: 8 }}>Aesthetic Services Assistant</h1>
-        <p style={{ marginBottom: 16, color: "#cbd5f5" }}>
-          Type a question below. 
+    <main className="chat-page">
+      <div className="chat-container">
+        <h1 className="chat-title">Aesthetic Services Assistant</h1>
+        <p className="chat-subtitle">
+          Type a question below.
         </p>
 
-        <div
-          style={{
-            border: "1px solid #1e293b",
-            borderRadius: 8,
-            padding: 12,
-            backgroundColor: "#020617",
-            maxHeight: "60vh",
-            overflowY: "auto",
-            marginBottom: 12
-          }}
-        >
+        <div className="chat-messages">
           {messages.length === 0 && (
-            <div style={{ color: "#64748b" }}>
+            <div className="chat-empty">
               Start your personalized journey here.
             </div>
           )}
+
           {messages.map((m, idx) => (
             <div
               key={idx}
-              style={{
-                marginBottom: 6,
-                textAlign: m.role === "user" ? "right" : "left"
-              }}
+              className={
+                "message-row " + (m.role === "user" ? "user" : "assistant")
+              }
             >
               <span
-                style={{
-                  display: "inline-block",
-                  padding: "6px 10px",
-                  borderRadius: 12,
-                  backgroundColor: m.role === "user" ? "#1d4ed8" : "#111827",
-                  maxWidth: "80%",
-                  whiteSpace: "pre-wrap"
-                }}
+                className={
+                  "message-bubble " +
+                  (m.role === "user" ? "message-user" : "message-bot")
+                }
               >
                 {m.content}
               </span>
             </div>
           ))}
+
           {loading && (
-            <div style={{ color: "#64748b" }}>Thinking…</div>
+            <div className="chat-loading">Thinking…</div>
           )}
         </div>
 
-        <form
-          onSubmit={handleSend}
-          style={{ display: "flex", gap: 8 }}
-        >
+        <form onSubmit={handleSend} className="chat-input">
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask a question..."
-            style={{
-              flex: 1,
-              padding: "8px 10px",
-              borderRadius: 999,
-              border: "1px solid #1e293b",
-              backgroundColor: "#020617",
-              color: "white"
-            }}
+            className="chat-input-field"
           />
           <button
             type="submit"
             disabled={loading}
-            style={{
-              padding: "8px 16px",
-              borderRadius: 999,
-              border: "none",
-              backgroundColor: loading ? "#4b5563" : "#22c55e",
-              color: "#020617",
-              fontWeight: 600,
-              cursor: loading ? "default" : "pointer"
-            }}
+            className="chat-send-button"
           >
             Send
           </button>
