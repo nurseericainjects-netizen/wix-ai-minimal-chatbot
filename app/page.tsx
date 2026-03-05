@@ -54,9 +54,7 @@ export default function HomePage() {
     <main className="chat-page">
       <div className="chat-container">
         <h1 className="chat-title">Aesthetic Services Assistant</h1>
-        <p className="chat-subtitle">
-          Type a question below.
-        </p>
+        <p className="chat-subtitle">Type a question below.</p>
 
         <div className="chat-messages">
           {messages.length === 0 && (
@@ -83,9 +81,7 @@ export default function HomePage() {
             </div>
           ))}
 
-          {loading && (
-            <div className="chat-loading">Thinking…</div>
-          )}
+          {loading && <div className="chat-loading">Thinking…</div>}
         </div>
 
         <form onSubmit={handleSend} className="chat-input">
