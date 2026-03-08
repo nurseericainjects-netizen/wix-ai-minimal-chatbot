@@ -42,7 +42,7 @@ export default function HomePage() {
         {
           role: "assistant",
           content:
-            "Error contacting AI service: " + (err?.message ?? "Unknown error"),
+            "Error contacting AI service. Please try again or contact Nurse Erica directly.",
         },
       ]);
     } finally {
@@ -53,13 +53,20 @@ export default function HomePage() {
   return (
     <main className="chat-page">
       <div className="chat-container">
-        <h1 className="chat-title">Aesthetic Services Assistant</h1>
-        <p className="chat-subtitle">Type a question below.</p>
+        <h1 className="chat-title">Nurse Erica • Aesthetic Assistant</h1>
+        <p className="chat-subtitle">
+          Ask about Botox / Dysport / Xeomin, dermal fillers, or facial
+          balancing in the King of Prussia, Phoenixville, and Morgantown, PA
+          areas.
+        </p>
 
         <div className="chat-messages">
           {messages.length === 0 && (
             <div className="chat-empty">
-              Start your personalized journey here.
+              Hi, I’m Nurse Erica’s aesthetic assistant. I can share general
+              information about treatments and aftercare—no medical advice. May
+              I have your first name and email so Nurse Erica can follow up with
+              details and availability?
             </div>
           )}
 
@@ -88,7 +95,7 @@ export default function HomePage() {
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask a question..."
+            placeholder="Ask a question about treatments or aftercare..."
             className="chat-input-field"
           />
           <button
