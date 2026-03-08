@@ -13,8 +13,8 @@ body {
   display: flex;
   justify-content: center;
   padding: 16px;
-  background-color: #050716;  /* deep navy like logo background */
-  color: #D4AF37;             /* gold */
+  background-color: #050716;  /* deep navy */
+  color: #d4af37;             /* gold */
 }
 
 /* Main chat container width */
@@ -27,14 +27,14 @@ body {
 .chat-title {
   font-size: 24px;
   margin-bottom: 8px;
-  color: #D4AF37;             /* main gold */
+  color: #d4af37;             /* main gold */
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 .chat-subtitle {
   margin-bottom: 16px;
-  color: #C3B58A;             /* softer gold for body text */
+  color: #c3b58a;             /* softer gold */
 }
 
 /* Scrollable message area */
@@ -42,7 +42,7 @@ body {
   border: 1px solid #262840;
   border-radius: 12px;
   padding: 12px;
-  background-color: #050716;  /* keep same dark background */
+  background-color: #050716;
   max-height: 60vh;
   overflow-y: auto;
   margin-bottom: 12px;
@@ -51,7 +51,7 @@ body {
 /* Empty state / loading text */
 .chat-empty,
 .chat-loading {
-  color: #C3B58A;
+  color: #c3b58a;
 }
 
 /* Rows and bubbles */
@@ -76,14 +76,14 @@ body {
 /* User message bubble – outlined gold */
 .message-user {
   background-color: transparent;
-  color: #F4D88A;
-  border: 1px solid #D4AF37;
+  color: #f4d88a;
+  border: 1px solid #d4af37;
 }
 
 /* Bot message bubble – filled soft navy with gold text */
 .message-bot {
   background-color: #111325;
-  color: #F4D88A;
+  color: #f4d88a;
 }
 
 /* Input row */
@@ -99,11 +99,11 @@ body {
   border-radius: 999px;
   border: 1px solid #262840;
   background-color: #050716;
-  color: #F4D88A;
+  color: #f4d88a;
 }
 
 .chat-input-field::placeholder {
-  color: #52556F;
+  color: #52556f;
 }
 
 /* Send button */
@@ -111,7 +111,7 @@ body {
   padding: 8px 16px;
   border-radius: 999px;
   border: none;
-  background: linear-gradient(135deg, #F4D88A, #D4AF37);
+  background: linear-gradient(135deg, #f4d88a, #d4af37);
   color: #050716;
   font-weight: 600;
   cursor: pointer;
@@ -119,6 +119,6 @@ body {
 
 .chat-send-button:disabled {
   background: #4b4f6a;
-  color: #C3B58A;
+  color: #c3b58a;
   cursor: default;
 }
