@@ -12,6 +12,55 @@ export default function HomePage() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // new: lead fields + state
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [leadSent, setLeadSent] = useState(false);
+  const [leadError, setLeadError] = useState<string | null>(null);
+
+  // build brief context string from conversation
+  function buildContextSnippet(msgs: Message[]): string {
+    return msgs
+      .slice(-6) // last few turns
+      .map((m) => `${m.role}: ${m.content}`)
+      .join("\n");
+  }
+
+  async function sendLead() {
+    setLeadError(null);
+    if (!name.trim() || !email.trim()) {
+      setLeadError("Please enter both your name and email.");
+      return;
+    }
+
+    try {
+      const context = buildContextSnippet(messages);
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          context,
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        setLeadError(
+          data?.error || "There was a problem sending your info. Please try again."
+        );
+        return;
+      }
+
+      setLeadSent(true);
+    } catch (err) {
+      setLeadError(
+        "There was a problem sending your info. Please try again or contact Nurse Erica directly."
+      );
+    }
+  }
+
   async function handleSend(e: React.FormEvent) {
     e.preventDefault();
     if (!input.trim() || loading) return;
@@ -60,13 +109,50 @@ export default function HomePage() {
           areas.
         </p>
 
+        {/* lead capture block at the top */}
+        <div className="lead-capture">
+          <p className="lead-text">
+            To have Nurse Erica follow up personally with availability and
+            pricing, please share your first name and email.
+          </p>
+          <div className="lead-form">
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="First name"
+              className="chat-input-field"
+            />
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+              className="chat-input-field"
+            />
+            <button
+              type="button"
+              onClick={sendLead}
+              disabled={leadSent}
+              className="chat-send-button"
+            >
+              {leadSent ? "Info sent ✓" : "Send to Nurse Erica"}
+            </button>
+          </div>
+          {leadError && <div className="lead-error">{leadError}</div>}
+          {leadSent && (
+            <div className="lead-success">
+              Thank you — Nurse Erica will review your questions and follow up.
+            </div>
+          )}
+        </div>
+
         <div className="chat-messages">
           {messages.length === 0 && (
             <div className="chat-empty">
               Hi, I’m Nurse Erica’s aesthetic assistant. I can share general
-              information about treatments and aftercare—no medical advice. May
-              I have your first name and email so Nurse Erica can follow up with
-              details and availability?
+              information about treatments and aftercare—no medical advice. You
+              can ask questions below at any time.
             </div>
           )}
 
