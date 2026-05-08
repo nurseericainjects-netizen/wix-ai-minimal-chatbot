@@ -4,7 +4,167 @@
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: system-ui, -apple-system,a* {
+      box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+}
+
+/* Page background and layout */
+.chat-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+    background-color: #f5f0e8; /* warm linen */
+    color: #3d2e22; /* deep espresso */
+}
+
+/* Main chat container width */
+.chat-container {
+    width: 100%;
+    max-width: 640px;
+}
+
+/* Title + subtitle */
+.chat-title {
+    font-size: 22px;
+    margin-bottom: 8px;
+    color: #3d2e22; /* deep espresso */
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.chat-subtitle {
+    margin-bottom: 16px;
+    color: #6b5a4a; /* warm mid-brown */
+}
+
+/* Lead capture */
+.lead-capture {
+    margin-bottom: 16px;
+}
+
+.lead-text {
+    color: #6b5a4a;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.lead-form {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.lead-error {
+    color: #b05a3a;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+.lead-success {
+    color: #5a7a5a;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+/* Scrollable message area */
+.chat-messages {
+    border: 1px solid #d9cfc2; /* warm taupe border */
+    border-radius: 12px;
+    padding: 12px;
+    background-color: #faf7f3; /* near-white warm */
+    max-height: 60vh;
+    overflow-y: auto;
+    margin-bottom: 12px;
+}
+
+/* Empty state / loading text */
+.chat-empty,
+.chat-loading {
+    color: #8a7a6a; /* warm grey-brown */
+}
+
+/* Rows and bubbles */
+.message-row {
+    margin-bottom: 6px;
+    text-align: left;
+}
+
+.message-row.user {
+    text-align: right;
+}
+
+.message-bubble {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 16px;
+    max-width: 80%;
+    white-space: pre-wrap;
+    box-shadow: 0 1px 4px rgba(60, 40, 20, 0.1);
+}
+
+/* User message bubble – sage green */
+.message-user {
+    background-color: #8a9a78; /* sage green */
+    color: #ffffff;
+    border: none;
+}
+
+/* Bot message bubble – warm parchment */
+.message-bot {
+    background-color: #ede5d8; /* warm parchment */
+    color: #3d2e22; /* deep espresso */
+}
+
+/* Input row */
+.chat-input {
+    display: flex;
+    gap: 8px;
+}
+
+/* Input field */
+.chat-input-field {
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid #d9cfc2;
+    background-color: #ffffff;
+    color: #3d2e22;
+    font-family: inherit;
+}
+
+.chat-input-field::placeholder {
+    color: #b0a090; /* warm grey */
+}
+
+/* Send / submit button */
+.chat-send-button {
+    padding: 8px 18px;
+    border-radius: 999px;
+    border: none;
+    background: #8a9a78; /* sage green */
+    color: #ffffff;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: 0.04em;
+    transition: background 0.2s;
+}
+
+.chat-send-button:hover {
+    background: #7a8a68;
+}
+
+.chat-send-button:disabled {
+    background: #c8bfb4;
+    color: #8a7a6a;
+    cursor: default;
+}BlinkMacSystemFont, sans-serif;
 }
 
 /* Page background and layout */
