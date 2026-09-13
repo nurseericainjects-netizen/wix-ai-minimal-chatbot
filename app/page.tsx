@@ -18,14 +18,6 @@ export default function HomePage() {
   const [leadSent, setLeadSent] = useState(false);
   const [leadError, setLeadError] = useState<string | null>(null);
 
-  // build brief context string from conversation
-  function buildContextSnippet(msgs: Message[]): string {
-    return msgs
-      .slice(-6) // last few turns
-      .map((m) => `${m.role}: ${m.content}`)
-      .join("\n");
-  }
-
   async function sendLead() {
     setLeadError(null);
     if (!name.trim() || !email.trim()) {
@@ -34,14 +26,15 @@ export default function HomePage() {
     }
 
     try {
-      const context = buildContextSnippet(messages);
+      // Only name and email leave the browser. The transcript can carry
+      // health-adjacent free text, and the follow-up this form promises
+      // (availability and pricing) does not need it.
       const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: name.trim(),
           email: email.trim(),
-          context,
         }),
       });
 
@@ -105,8 +98,7 @@ export default function HomePage() {
         <h1 className="chat-title">Nurse Erica • Aesthetic Assistant</h1>
         <p className="chat-subtitle">
           Ask about Botox / Dysport / Xeomin, dermal fillers, or facial
-          balancing in the King of Prussia, Phoenixville, and Morgantown, PA
-          areas.
+          balancing in Philadelphia, PA and Chester County, PA.
         </p>
 
         {/* lead capture block at the top */}
