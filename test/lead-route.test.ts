@@ -98,7 +98,73 @@ describe("POST /api/lead", () => {
     expect(to).toBe("business@invalid.test");
   });
 
-  // NOTE: input validation, header sanitization and error-response hygiene
-  // are asserted in a separate commit -- they are distinct changes from this
-  // privacy fix and would blur its diff.
+  describe("validation", () => {
+    it("rejects a submission with no name or email", async () => {
+      const res = await postLead({ name: "", email: "" });
+      expect(res.status).toBe(400);
+      expect(sendMock).not.toHaveBeenCalled();
+    });
+
+    it("rejects a malformed email rather than mailing 'Unknown'", async () => {
+      const res = await postLead({ name: "Jane Doe", email: "not-an-email" });
+      expect(res.status).toBe(400);
+      expect(sendMock).not.toHaveBeenCalled();
+    });
+
+    it("never mails the literal string Unknown", async () => {
+      await postLead({});
+      expect(sendMock).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("header injection", () => {
+    it("strips CR and LF from the name before it reaches the subject", async () => {
+      const injected =
+        "Jane" + CRLF + "Bcc: attacker@example.com" + CRLF + "Subject: spam";
+      const res = await postLead({ name: injected, email: "jane@example.com" });
+      expect(res.status).toBe(200);
+
+      const { subject } = outboundMail();
+      expect(subject).not.toContain(CR);
+      expect(subject).not.toContain(LF);
+      expect(subject.toLowerCase()).not.toContain("bcc:");
+    });
+
+    it("caps an absurdly long name", async () => {
+      const res = await postLead({
+        name: "A".repeat(5000),
+        email: "jane@example.com",
+      });
+      expect(res.status).toBe(200);
+      expect(outboundMail().subject.length).toBeLessThan(300);
+    });
+  });
+
+  describe("error responses", () => {
+    it("does not leak internal error detail to the caller", async () => {
+      sendMock.mockRejectedValueOnce(
+        new Error("Resend 401: invalid api key re_live_SECRETVALUE")
+      );
+      const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+      const res = await postLead({ name: "Jane", email: "jane@example.com" });
+      expect(res.status).toBe(500);
+
+      const payload = await res.json();
+      const serialized = JSON.stringify(payload);
+      expect(serialized).not.toContain("re_live_SECRETVALUE");
+      expect(serialized).not.toContain("401");
+      expect(payload).not.toHaveProperty("details");
+      expect(payload).not.toHaveProperty("key");
+
+      errorSpy.mockRestore();
+    });
+
+    it("does not leak config booleans when unconfigured", async () => {
+      const res = await postLead({ name: "Jane", email: "jane@example.com" });
+      const payload = await res.json().catch(() => ({}));
+      expect(payload).not.toHaveProperty("key");
+      expect(payload).not.toHaveProperty("to");
+    });
+  });
 });
