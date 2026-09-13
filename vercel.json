@@ -5,7 +5,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "frame-ancestors https://www.aestheticnurseerica.com https://aestheticnurseerica.com https://*.wixsite.com https://*.editorx.io"
+          "value": "frame-ancestors https://www.aestheticnurseerica.com https://aestheticnurseerica.com"
         }
       ]
     }
