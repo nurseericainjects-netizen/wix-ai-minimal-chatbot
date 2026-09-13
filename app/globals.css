@@ -7,34 +7,42 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* Page background and layout */
 .chat-page {
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  padding: 16px;
-  background-color: #050716;  /* deep navy */
-  color: #d4af37;             /* gold */
+  padding: 20px 16px 24px;
+  background-color: #050716;
+  color: #d4af37;
 }
 
-/* Main chat container width */
 .chat-container {
   width: 100%;
-  max-width: 640px;
+  max-width: 620px;
 }
 
-/* Title + subtitle */
+/* Header */
+.chat-header {
+  margin-bottom: 10px;
+}
+
 .chat-title {
-  font-size: 24px;
-  margin-bottom: 8px;
-  color: #d4af37;             /* main gold */
+  font-size: 18px;
+  margin: 0 0 4px;
+  color: #d4af37;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 .chat-subtitle {
-  margin-bottom: 16px;
-  color: #c3b58a;             /* softer gold */
+  margin: 0;
+  color: #c3b58a;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.chat-subtitle-location {
+  color: #52556f;
 }
 
 /* Scrollable message area */
@@ -43,15 +51,15 @@ body {
   border-radius: 12px;
   padding: 12px;
   background-color: #050716;
-  max-height: 60vh;
+  max-height: 65vh;
   overflow-y: auto;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
-/* Empty state / loading text */
 .chat-empty,
 .chat-loading {
   color: #c3b58a;
+  font-size: 13px;
 }
 
 /* Rows and bubbles */
@@ -66,21 +74,21 @@ body {
 
 .message-bubble {
   display: inline-block;
-  padding: 8px 12px;
+  padding: 7px 12px;
   border-radius: 16px;
   max-width: 80%;
   white-space: pre-wrap;
+  font-size: 14px;
+  line-height: 1.5;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
-/* User message bubble – outlined gold */
 .message-user {
   background-color: transparent;
   color: #f4d88a;
   border: 1px solid #d4af37;
 }
 
-/* Bot message bubble – filled soft navy with gold text */
 .message-bot {
   background-color: #111325;
   color: #f4d88a;
@@ -90,35 +98,79 @@ body {
 .chat-input {
   display: flex;
   gap: 8px;
+  margin-bottom: 10px;
 }
 
-/* Input field */
 .chat-input-field {
   flex: 1;
-  padding: 8px 10px;
+  padding: 8px 12px;
   border-radius: 999px;
   border: 1px solid #262840;
   background-color: #050716;
   color: #f4d88a;
+  font-size: 14px;
+  outline: none;
+}
+
+.chat-input-field:focus {
+  border-color: #d4af37;
 }
 
 .chat-input-field::placeholder {
   color: #52556f;
 }
 
-/* Send button */
 .chat-send-button {
   padding: 8px 16px;
   border-radius: 999px;
   border: none;
   background: linear-gradient(135deg, #f4d88a, #d4af37);
   color: #050716;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .chat-send-button:disabled {
   background: #4b4f6a;
   color: #c3b58a;
   cursor: default;
+}
+
+/* Lead capture */
+.lead-capture {
+  margin-top: 2px;
+}
+
+.lead-toggle {
+  background: none;
+  border: none;
+  color: #52556f;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.lead-toggle:hover {
+  color: #c3b58a;
+}
+
+.lead-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.lead-error {
+  color: #e07070;
+  font-size: 12px;
+}
+
+.lead-success {
+  color: #8bc48b;
+  font-size: 12px;
 }
