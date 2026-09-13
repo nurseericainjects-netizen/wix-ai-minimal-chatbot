@@ -13,16 +13,22 @@ export async function POST(req: NextRequest) {
       }
 
   const body = await req.json().catch(() => null);
+
+      // This endpoint is public, so a caller can still POST a `context`
+      // field (cached clients will). Only the two accepted fields are read;
+      // everything else is discarded here. `context` is never bound to a
+      // variable, so it cannot be forwarded, logged, or persisted -- which
+      // matters more with Resend than it did with SMTP, because Resend
+      // stores message bodies and exposes them in its dashboard.
       const name = body?.name?.toString() || "Unknown";
       const email = body?.email?.toString() || "Unknown";
-      const context = body?.context?.toString() || "";
 
   try {
           const result = await resend.emails.send({
                     from: "Nurse Erica Chatbot <onboarding@resend.dev>",
                     to: TO_EMAIL,
                     subject: `New Aesthetic Lead from ${name}`,
-                    text: `Name: ${name}\nEmail: ${email}\n\nConversation snippet:\n${context}`,
+                    text: `Name: ${name}\nEmail: ${email}`,
           });
 
         return NextResponse.json({ ok: true, result });
