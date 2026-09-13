@@ -98,8 +98,7 @@ export default function HomePage() {
         <h1 className="chat-title">Nurse Erica • Aesthetic Assistant</h1>
         <p className="chat-subtitle">
           Ask about Botox / Dysport / Xeomin, dermal fillers, or facial
-          balancing in the King of Prussia, Phoenixville, and Morgantown, PA
-          areas.
+          balancing in Philadelphia, PA and Chester County, PA.
         </p>
 
         {/* lead capture block at the top */}

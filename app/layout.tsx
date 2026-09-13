@@ -2,8 +2,9 @@ import "./globals.css";
 import React from "react";
 
 export const metadata = {
-  title: "Wix AI Minimal Chatbot",
-  description: "Minimal chatbot for embedding into Wix."
+  title: "Nurse Erica • Aesthetic Assistant",
+  description:
+    "Ask about Botox, Dysport, Xeomin, dermal fillers, and facial balancing. Serving Philadelphia, PA and Chester County, PA."
 };
 
 export default function RootLayout({
