@@ -1,0 +1,39 @@
+# Normalize all repository text files to LF in the index and working tree.
+# This project deploys to Linux-based infrastructure and currently has no
+# tracked file types that require CRLF endings.
+* text=auto eol=lf
+
+# Explicit source, config, and documentation rules.
+*.ts     text eol=lf
+*.tsx    text eol=lf
+*.js     text eol=lf
+*.mjs    text eol=lf
+*.cjs    text eol=lf
+*.json   text eol=lf
+*.css    text eol=lf
+*.md     text eol=lf
+*.yml    text eol=lf
+*.yaml   text eol=lf
+
+# Shell scripts must remain LF for Linux and CI compatibility.
+*.sh     text eol=lf
+
+# Preserve CRLF for future Windows command scripts if they are introduced.
+*.bat    text eol=crlf
+*.cmd    text eol=crlf
+*.ps1    text eol=crlf
+
+# Binary/media/archive files must never be text-normalized.
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+*.ico    binary
+*.webp   binary
+*.woff   binary
+*.woff2  binary
+*.ttf    binary
+*.eot    binary
+*.pdf    binary
+*.zip    binary
+*.mp4    binary
